@@ -8,4 +8,4 @@ Config.noWeapons = true   -- No driver drive bys
 
 /cam [on or Off] -- Turn on/off cin cam, also Locks cin cam if you use /can while in cin mode
 
-
+Be my last release for awhile, some things have come up, enjoy!
