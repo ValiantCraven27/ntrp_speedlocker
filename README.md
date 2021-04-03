@@ -1,4 +1,4 @@
-# ntrp_speedlocker
+# ntrp_speedlocker - not obfuscated
 
 Succesor to my ntrp_limiter (standalone)
 Locks Speed with an assigned key/ Press again to unlock speed (FiveM)
