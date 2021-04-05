@@ -1,5 +1,5 @@
 # ntrp_speedlocker
-
+version 1.2
 Succesor to my ntrp_limiter (standalone)
 Locks Speed with an assigned key/ Press again to unlock speed (FiveM)
 
