@@ -29,10 +29,12 @@ function speedLock()
     if speedLocker == true then
         PlaySoundFrontend(-1, 'NAV', 'HUD_AMMO_SHOP_SOUNDSET', false)
         SetEntityMaxSpeed(GetVehiclePedIsIn(ped, false), 999.9)
+        NTRP.Notify(" 🚦 Speedlock : Inactive ", "warning", math.random(2000, 2000))
         speedLocker = false  
     else
         PlaySoundFrontend(-1, 'NAV', 'HUD_AMMO_SHOP_SOUNDSET', false)
-        SetEntityMaxSpeed(GetVehiclePedIsIn(ped, false), vehicleMPH )       
+        SetEntityMaxSpeed(GetVehiclePedIsIn(ped, false), vehicleMPH )  
+        NTRP.Notify(" 🚦 Speedlock : Active", "success", math.random(2000, 2000))  
         speedLocker = true  
     end 
   Citizen.Wait(300)   
@@ -65,6 +67,26 @@ Citizen.CreateThread(function() -- Driver Ped no Drive By
   end
 end)
 
+if Config.fuelWarning then
+Citizen.CreateThread(function() -- Driver Ped no Drive By
+ while true do 
+  Citizen.Wait(Config.fuelTimer)
+     local ped = GetPlayerPed(-1)
+     local vehicleId = GetVehiclePedIsIn(ped, false)
+     local driverPed = GetPedInVehicleSeat(vehicleId, -1) 
+     local IsInVehicle = IsPedInAnyVehicle(ped, false)
+     local IsOnBike = IsPedOnAnyBike(ped	)
+
+     local fuelLevel =  GetVehicleFuelLevel(vehicleId)
+     local roundFuel = Round(fuelLevel)    
+ 
+     if fuelLevel < Config.fuelPercent and IsInVehicle and driverPed == ped and not IsOnBike then
+         NTRP.Notify("Warning Low Fuel : ⛽ "..roundFuel.." %", "error", math.random(3000, 3000))
+     end
+  end
+ end)
+end
+
 RegisterCommand("cam", function(source, args)     
       camState = args[1]        
   if camState == "on" then
@@ -74,3 +96,9 @@ RegisterCommand("cam", function(source, args)
       VehCamOff = true
    end               
 end)
+
+NTRP = {}
+NTRP.Notify = function(text, type, timeout)
+    exports.pNotify:SendNotification({ text = text, type =type, theme = "metroui", timeout = timeout, layout = "centerLeft", queue = "left"
+})
+end
