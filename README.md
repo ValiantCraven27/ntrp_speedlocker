@@ -12,6 +12,6 @@ Config.fuelTimer = 25000 -- Warning loop
 /cam [on or Off] -- Turn on/off cin cam, also Locks cin cam if you use /can while in cin mode
 
 
-- Do not redistrbute, Clain the code is yours.
+- Give Credits
 - Intended for use with FiveM 
 - Commercial Use
